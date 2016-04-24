@@ -1,0 +1,18 @@
+<ion-view  hide-nav-bar="true">
+  <ion-content class="padding" style="background-color:#eee">
+    <div style="text-align:center;margin-top:20px;">
+      <h3 style="margin:0">Dinewire</h3>
+    </div>
+    <form ng-submit="login()" name="loginForm" novalidate>
+      <div class="list list-inset">
+          <label class="item item-input">
+              <input type="text" placeholder="Email" ng-model="data.email">
+          </label>
+          <label class="item item-input">
+              <input type="password" placeholder="Password" ng-model="data.password">
+          </label>
+      </div>
+      <button class="button button-block button-calm">Login</button>
+    </form>
+  </ion-content>
+</ion-view>

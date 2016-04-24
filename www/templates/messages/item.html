@@ -1,0 +1,21 @@
+<ion-view>
+  <ion-nav-title>{{message.subject}}</ion-nav-title>
+    <ion-nav-buttons side="right">
+  <button class="button button-icon button-clear ion-reply" ng-click="openReply(message)"></button>
+  <button class="button button-icon button-clear ion-trash-a" ng-click="deleteMessage(message)"></button>
+</ion-nav-buttons>
+  <ion-content padding="false">
+    <ion-card padding="false">
+      <div class="item">
+        <h2>{{message.subject}}</h2>
+        <p>{{message.created_at | formatDate}}</p>
+      </div>
+      <div class="item">
+        <p ng-bind-html="message.body"></p>
+      </div>
+
+
+
+    </ion-card>
+  </ion-content>
+</ion-view>

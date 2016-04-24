@@ -1,0 +1,22 @@
+<ion-view view-title="Meals" cache-view="false">
+<ion-nav-buttons side="right">
+	<button class="button button-icon button-clear ion-android-add" ng-click="openMealForm()">
+	</button>
+</ion-nav-buttons>
+	<ion-content>
+		<ion-list can-swipe="true">
+		  <ion-item ng-repeat="meal in meals" class="item item-thumbnail-left" href="#/app/meals/{{meal.id}}">
+			<img ng-src="{{meal.image_url_thumb}}">
+			<h2>{{meal.name}}</h2>
+			<p>{{meal.description}}</p>
+
+			<ion-option-button class="button-calm" ng-click="editMeal(meal)">
+				Edit
+			</ion-option-button>
+			<ion-option-button class="button-assertive" ng-click="deleteMeal(meal,$index)">
+				Delete
+			</ion-option-button>
+		  </ion-item>
+		</ion-list>
+	</ion-content>
+</ion-view>
