@@ -57,7 +57,6 @@ angular.module('starter.services', [])
 function formDataObject (data) {
 	var fd = new FormData();
 	angular.forEach(data, function(value, key) {
-		console.log(value,key);
 	    fd.append(key, value);
 	});
 	return fd;

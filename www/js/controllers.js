@@ -37,9 +37,11 @@ angular.module('starter.controllers', [])
     }
 })
 
-.controller('MealsCtrl', function($scope,$ionicModal,$ionicLoading,MealsService) {
+.controller('MealsCtrl', function($scope, $ionicModal,$ionicLoading,MealsService) {
   $scope.meals = MealsService.query();
   // Form data for the login modal
+  // 
+  $scope.loadingLocation = false;
   $scope.mealData = {};
 
 
@@ -49,12 +51,44 @@ angular.module('starter.controllers', [])
    }); 
   }
 
+  $scope.addMeal = function(){
+     $scope.mealData = {
+      name: "",
+      description: "",
+      image: "",
+      latitude: 0,
+      longitude: 0
+    };
+    $scope.getLocation();
+    $scope.openMealForm();
+  }
+
 
   $scope.editMeal = function(meal){
    $scope.mealData = MealsService.get({id: meal.id},function(){
     $scope.openMealForm();
    }); 
   }
+
+  $scope.getLocation = function(){
+    $scope.loadingLocation = true;
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position){
+            setTimeout(function () {
+              $scope.$apply(function(){
+                $scope.loadingLocation = false;
+                $scope.mealData.latitude = position.coords.latitude.toFixed(5); 
+                $scope.mealData.longitude = position.coords.longitude.toFixed(5);
+              });
+            }, 20);         
+        },function(){
+          $scope.loadingLocation = false;          
+        });
+    } else {
+      $scope.loadingLocation = false;
+    }
+  };
+
 
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/meal_form.html', {

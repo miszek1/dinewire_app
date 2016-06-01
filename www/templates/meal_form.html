@@ -6,7 +6,7 @@
     </div>
   </ion-header-bar>
   <ion-content>
-    <form ng-submit="sendMealForm()">
+    <form>
       <div class="list">
         <label class="item item-input">
           <span class="input-label">Name</span>
@@ -16,16 +16,20 @@
           <span class="input-label">Description</span>
           <input type="text" ng-model="mealData.description">
         </label>
-        <label class="item item-input">
-          <span class="input-label">Location</span>
-          <input type="text" ng-model="mealData.location">
-        </label>
+        <div class="row">
+          <div class="col"  style="padding: 15px 9px 0px 10px;color: #444;font-size: 16px;">Location</div>          
+          <div class="col col-70" style="padding: 15px 0px 0px 0px;color: #444;font-size: 16px;">
+            <span ng-if="loadingLocation">Getting location...</span>
+            <span ng-if="!loadingLocation">{{mealData.latitude}},{{mealData.longitude}}</span>
+          </div>
+          <div class="col col-10"><button class="button button-icon ion-android-locate " ng-click="getLocation()"></button></div>
+        </div>
         <label class="item item-input">
           <span class="input-label">Image</span>
           <input type="file" file-model="mealData.image" name="image">
         </label>
         <label class="item">
-          <button class="button button-block button-positive" type="submit">Add Meal</button>
+          <button class="button button-block button-positive"  ng-click="sendMealForm()">Add Meal</button>
         </label>
       </div>
     </form>
