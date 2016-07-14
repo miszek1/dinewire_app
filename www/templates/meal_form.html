@@ -16,14 +16,28 @@
           <span class="input-label">Description</span>
           <input type="text" ng-model="mealData.description">
         </label>
-        <div class="row">
+        <!-- <div class="row">
           <div class="col"  style="padding: 15px 9px 0px 10px;color: #444;font-size: 16px;">Location</div>          
           <div class="col col-70" style="padding: 15px 0px 0px 0px;color: #444;font-size: 16px;">
             <span ng-if="loadingLocation">Getting location...</span>
             <span ng-if="!loadingLocation">{{mealData.latitude}},{{mealData.longitude}}</span>
           </div>
           <div class="col col-10"><button class="button button-icon ion-android-locate " ng-click="getLocation()"></button></div>
+        </div> -->
+      <div class="row no-padding">
+        <div class="col-25 no-padding">
+          <ion-list><ion-item class="item-custom-input">Location</ion-item></ion-list>
         </div>
+        <div class="col-60 no-padding item-icon-right">
+          <ion-list>
+            <ion-item class="item-custom-input">
+              <span ng-if="loadingLocation">Getting location...</span>
+              <span ng-if="!loadingLocation">{{mealData.latitude}},{{mealData.longitude}}</span>
+            </ion-item>
+          </ion-list>
+        </div>
+        <button class="col icon ion-android-locate balanced button-col" ng-click="getMealLocation()"></button>
+      </div>
         <label class="item item-input">
           <span class="input-label">Image</span>
           <input type="file" file-model="mealData.image" name="image">
