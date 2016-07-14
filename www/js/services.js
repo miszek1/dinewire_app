@@ -1,8 +1,7 @@
-var baseURL= 'http://localhost:3000/api/v1';
 angular.module('starter.services', [])
 .factory('MealsService', function ($resource,$localstorage) {
 	var token = $localstorage.get('auth');
-    return $resource(baseURL + '/meals/:id',{id: "@id"},{
+    return $resource(baseURL +'/meals/:id',{id: "@id"},{
         query: 	{ method: 'GET', isArray: true, headers: {'authentication': token}},
         get: 	{ method: 'GET', headers: {'authentication': token}},
         remove: { method: 'DELETE', headers: {'authentication': token}},

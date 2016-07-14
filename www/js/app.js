@@ -4,6 +4,8 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
+map = null;
+baseURL = 'http://dinewire.herokuapp.com/api/v1';
 angular.module('starter', ['ionic','ngResource', 'starter.controllers', 'starter.services'])
 
 .run(function($ionicPlatform,$rootScope,$state) {
