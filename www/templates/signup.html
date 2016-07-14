@@ -1,0 +1,37 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-stable">
+    <h1 class="title">Create An Account</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeSignupForm()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content style="background: url('img/food_background.jpg') top center">
+    <form ng-submit="registerAccount()">
+        <div class="padding">
+
+          <label class="item item-input">
+              <input type="text" placeholder="First Name" ng-model="signupData.first_name">
+          </label>
+          <label class="item item-input">
+              <input type="text" placeholder="Last Name" ng-model="signupData.last_name">
+          </label>
+          <label class="item item-input">
+              <input type="text" placeholder="Email" ng-model="signupData.email">
+          </label>
+          <br>
+          <label class="item item-input">
+              <input type="text" placeholder="Username" ng-model="signupData.user_name">
+          </label>
+          <label class="item item-input">
+              <input type="password" placeholder="Password" ng-model="signupData.password" ng-min-length="8">
+          </label>
+          <label class="item item-input">
+              <input type="password" placeholder="Confirm Password" ng-model="signupData.password_confirmation">
+          </label>
+      </div>
+      <div class="padding">
+        <button class="button button-block button-positive">Register</button>
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>
