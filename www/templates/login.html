@@ -1,7 +1,11 @@
 <ion-view  hide-nav-bar="true">
-  <ion-content class="padding" style="background-color:#eee">
-    <div style="text-align:center;margin-top:20px;">
-      <h3 style="margin:0">Dinewire</h3>
+  <ion-content class="padding" style="background: url('img/food_background.jpg') top center">
+    <div class="slider-content">
+      <h1>
+        <span class="pacifico">Food on demand</span>
+        <span class="bold" style="font-size:55px;">DINEWIRE</span>
+      </h1>
+      <h4><span class="pacifico">Post Search Chat Eat</span></h4>
     </div>
     <form ng-submit="login()" name="loginForm" novalidate>
       <div class="list list-inset">
@@ -12,7 +16,9 @@
               <input type="password" placeholder="Password" ng-model="data.password">
           </label>
       </div>
-      <button class="button button-block button-calm">Login</button>
+      <button class="button button-block button-positive">Login</button>
     </form>
+      <p style="text-align:center;font-weight:bold;color:white">OR</p>
+      <button class="button button-block button-balanced" ng-click="openSignupForm()"><strong>Sign Up For an Account</strong></button>
   </ion-content>
 </ion-view>

@@ -1,1 +1,31 @@
 /* Empty. Add your own CSS if you like */
+span.pacifico {
+    font-family: 'Pacifico', cursive;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.slider-content h1, .slider-content h4{
+	text-align:center;
+	margin-top:20px;
+	color: #fff;
+}
+.no-padding{
+    padding: 0 !important;
+}
+.no-margin{
+    margin: 0 !important;
+}
+
+
+button.col.button-col.activated {
+    background: #F3F2F2;
+}
+button.col.button-col {
+    background: transparent;
+    border: 1px solid #ccc;
+}
+
+.col.button-col:before {
+    font-size: 21px !important;
+}
