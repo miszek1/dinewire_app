@@ -1,4 +1,12 @@
 {
   "name": "dinnerwire_app",
-  "app_id": "583bab45"
+  "app_id": "583bab45",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
 }
