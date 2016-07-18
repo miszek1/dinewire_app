@@ -26,6 +26,7 @@ angular.module('starter', ['ionic','ngResource', 'starter.controllers', 'starter
 .run(function($ionicPlatform,$rootScope,$state) {
 
   $ionicPlatform.ready(function() {
+     
     // $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
     //   var loggedIn = false;
     //   if(loggedIn) {
@@ -49,14 +50,24 @@ angular.module('starter', ['ionic','ngResource', 'starter.controllers', 'starter
 
   });
 })
-
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($httpProvider) {
+  $httpProvider.defaults.headers.common.authentication = window.localStorage.getItem('auth');
+})
+.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
   $stateProvider
 
     .state('login', {
       url: '/login',
       templateUrl: 'templates/login.html',
-      controller: 'LoginCtrl'
+      controller: 'LoginCtrl',
+      resolve:{
+        item: function($localstorage,$state,$timeout,authService){
+          if($localstorage.get("auth",0) != 0){
+            $httpProvider.defaults.headers.common.authentication = window.localStorage.getItem('auth');
+            $timeout(function(){$state.go('app.meals');},200);
+          } 
+        }
+      }
     })
 
     .state('app', {
@@ -66,8 +77,24 @@ angular.module('starter', ['ionic','ngResource', 'starter.controllers', 'starter
       controller: 'AppCtrl'
     })
 
-    
-
+    .state('app.mymeals', {
+      url: '/mymeals',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/my_meals/list.html',
+            controller: 'MyMealsCtrl'
+          }
+      }
+    })
+    .state('app.mymeal', {
+      url: '/mymeals/:mealId',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/my_meals/item.html',
+          controller: 'MyMealCtrl'
+        }
+      }
+    })
     .state('app.meals', {
       url: '/meals',
         views: {
@@ -87,7 +114,6 @@ angular.module('starter', ['ionic','ngResource', 'starter.controllers', 'starter
         }
       }
     })
-
     .state('app.messages', {
       url: '/messages',
         views: {
