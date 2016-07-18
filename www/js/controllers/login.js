@@ -1,13 +1,13 @@
 angular.module('starter.controllers')
 
-.controller('LoginCtrl', function($scope, $ionicPopup, $state, $timeout, $http, $localstorage, $ionicLoading, $ionicModal, LoginService) {
+.controller('LoginCtrl', function($scope, $ionicPopup, $state, $timeout, $localstorage,$http, $ionicLoading, $ionicModal, LoginService, authService) {
     $scope.data = {};
     $scope.login = function() {
       $ionicLoading.show({template: '<ion-spinner></ion-spinner><div>Signing In...</div>'});
         LoginService.save({body:$scope.data},function(data) {
           if(data.success){
-            console.log(data);
-            $localstorage.set('auth',data.user.authentication_token);
+            $localstorage.set("auth",data.user.authentication_token);
+            $http.defaults.headers.common.authentication = data.user.authentication_token;
             $ionicLoading.hide();
             $state.go('app.meals');
           } else {

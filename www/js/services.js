@@ -1,34 +1,47 @@
 angular.module('starter.services', [])
-.factory('MealsService', function ($resource,$localstorage) {
-	var token = $localstorage.get('auth');
+.factory('MealsService', function ($resource,$localstorage,authService) {
     return $resource(baseURL +'/meals/:id',{id: "@id"},{
-        query: 	{ method: 'GET', isArray: true, headers: {'authentication': token}},
-        get: 	{ method: 'GET', headers: {'authentication': token}},
-        remove: { method: 'DELETE', headers: {'authentication': token}},
+        my_query:  { method: 'GET', isArray: true, params:{my_meals:true}},
+        query: 	{ method: 'GET', isArray: true},
+        get: 	{ method: 'GET'},
+        remove: { method: 'DELETE'},
     	update: {
                 method: 'PUT',
                 transformRequest: formDataObject,
-                headers: {'authentication': token, 'Content-Type':undefined, enctype:'multipart/form-data'}
+                headers: {'Content-Type':undefined, enctype:'multipart/form-data'}
             },
     	save: {
                 method: 'POST',
                 transformRequest: formDataObject,
-                headers: {'authentication': token, 'Content-Type':undefined, enctype:'multipart/form-data'}
+                headers: {'Content-Type':undefined, enctype:'multipart/form-data'}
             }
     });
 })
 .factory('MessageService', function ($resource,$localstorage) {
-	var token = $localstorage.get('auth');
     return $resource(baseURL + '/messages/:id',{id: "@id"}, {
-        query: 	{ method: 'GET', isArray: true, headers: {'authentication': token}},
-        get: 	{ method: 'GET', headers: {'authentication': token}},
-        save: 	{ method: 'POST', headers: {'authentication': token}},
-        remove: { method: 'DELETE', headers: {'authentication': token}}
+        query: 	{ method: 'GET', isArray: true},
+        get: 	{ method: 'GET'},
+        save: 	{ method: 'POST'},
+        remove: { method: 'DELETE'}
 
     });
 })
 .factory('LoginService', function ($resource) {
     return $resource(baseURL + '/sessions');
+})
+.factory('authService', function ($http,$resource,$localstorage) {
+    return {
+        setAuth: function(auth){
+            $resource.defaults.headers.common['authentication'] = auth;
+            console.log($http.defaults.headers);
+            $localstorage.set('auth',auth);
+            $http.defaults.headers.common.authentication = auth;
+
+        },
+        getAuth:function(){
+            return $localstorage.get('auth');
+        }
+    }
 })
 .factory('$localstorage', ['$window', function($window) {
   return {
@@ -52,11 +65,10 @@ angular.module('starter.services', [])
     }
   }
 }]);
-
-function formDataObject (data) {
-	var fd = new FormData();
-	angular.forEach(data, function(value, key) {
-	    fd.append(key, value);
-	});
-	return fd;
+function formDataObject (data,headersGetter) {
+    var fd = new FormData();
+    angular.forEach(data, function(value, key) {
+        fd.append(key, value);
+    });
+    return fd;
 }
