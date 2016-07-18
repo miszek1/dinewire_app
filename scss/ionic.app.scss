@@ -15,9 +15,45 @@ $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
 
+$light:                           #fefcf9 !default;
+$stable:                          #d9b567 !default;
+
+$menu-bg: 				          #faf5ea !default;
+$base-background-color:           #faf5ea !default;
+
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+span.pacifico {
+    font-family: 'Pacifico', cursive;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.slider-content h1, .slider-content h4{
+	text-align:center;
+	margin-top:20px;
+	color: #fff;
+}
+.no-padding{
+    padding: 0 !important;
+}
+.no-margin{
+    margin: 0 !important;
+}
+
+
+button.col.button-col.activated {
+    background: #F3F2F2;
+}
+button.col.button-col {
+    background: transparent;
+    border: 1px solid #ccc;
+}
+
+.col.button-col:before {
+    font-size: 21px !important;
+}
