@@ -27,7 +27,8 @@ angular.module('starter.services')
                         _self.setLastPosition(locationPickerPosition);
                         q.resolve(locationPickerPosition);
                     },
-                    function(error){ console.log(error);}
+                    function(error){ console.log(error) },
+                    { enableHighAccuracy: true } 
                 );
 
             });
@@ -220,9 +221,9 @@ angular.module('starter.services')
                             'position': currentPosition,
                             'snippet': 'Hold down for 2 sec.\nDrag marker to inspection location\nClick close when done',
                             'disableAutoPan': true,
-                            'icon': {
-                                'url': 'img/marker.png'
-                            },
+                            // 'icon': {
+                            //     'url': 'img/marker.png'
+                            // },
                             'draggable': true
                         }, function(marker) {
                             locationPin = marker;

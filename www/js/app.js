@@ -5,7 +5,22 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 map = null;
-baseURL = 'http://dinewire.herokuapp.com/api/v1';
+//baseURL = 'http://dinewire.herokuapp.com/api/v1';
+baseURL = 'http://10.0.1.6:3000/api/v1';
+lastknownLocation = null;
+token = null;
+function distance(lat1, lon1, lat2, lon2) {
+  var radlat1 = Math.PI * lat1/180
+  var radlat2 = Math.PI * lat2/180
+  var theta = lon1-lon2
+  var radtheta = Math.PI * theta/180
+  var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+  dist = Math.acos(dist)
+  dist = dist * 180/Math.PI
+  dist = dist * 60 * 1.1515
+  return dist
+}
+
 angular.module('starter', ['ionic','ngResource', 'starter.controllers', 'starter.services'])
 
 .run(function($ionicPlatform,$rootScope,$state) {
@@ -104,6 +119,27 @@ angular.module('starter', ['ionic','ngResource', 'starter.controllers', 'starter
     }
 
 })    
+.filter('distance', function($q,MapService) {
+
+  return function(locationItem) {
+    var q = $q.defer();
+    if(locationItem.latitude <= 0) {
+      return "No Distance";
+    }
+    if(!lastknownLocation){
+      MapService.getLocation().then(function(position){
+        lastknownLocation = position;
+        var dist = distance(lastknownLocation.lat, lastknownLocation.lng, locationItem.latitude, locationItem.longitude);
+        return dist.toFixed(2) + " mi.";
+      });
+    } else {
+      var dist = distance(lastknownLocation.lat, lastknownLocation.lng, locationItem.latitude, locationItem.longitude);
+      return dist.toFixed(2) + " mi.";
+      
+    }
+    return q.promise;
+  };
+})
 .directive('fileModel', ['$parse', function ($parse) {
     return {
         restrict: 'A',
