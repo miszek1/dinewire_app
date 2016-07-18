@@ -1,20 +1,24 @@
 angular.module('starter.controllers')
 
-.controller('MealsCtrl', function($scope, $ionicModal,$ionicLoading,MealsService,MapService) {
-  $scope.meals = MealsService.query();
+.controller('MealsCtrl', function($scope, $ionicModal,$ionicLoading,MealsService,MapService,$state) {
   // Form data for the login modal
   // 
   $scope.loadingLocation = false;
-  $scope.mealData = {};
-
-
-  $scope.deleteMeal = function(meal,idx){
-   MealsService.remove({id: meal.id},function(){
-    $scope.meals.splice(idx, 1);
-   }); 
+  $scope.doRefresh = function(){
+    $scope.mealData = {};
+    $scope.meals = MealsService.query();
+    MapService.getLocation().then(function(position){
+      lastknownLocation = position;
+      $scope.mealData.latitude = position.lat;
+      $scope.mealData.longitude = position.lng;
+    });
+    $scope.$broadcast('scroll.refreshComplete');
   }
+  $scope.$on("$ionicView.beforeEnter", function(event, data){
+    $scope.doRefresh();
+  });
 
-  $scope.addMeal = function(){
+   $scope.addMeal = function(){
      $scope.mealData = {
       name: "",
       description: "",
@@ -23,19 +27,13 @@ angular.module('starter.controllers')
       longitude: 0
     };
 
-  MapService.getLocation().then(function(position){
+    MapService.getLocation().then(function(position){
+      lastknownLocation = position;
       $scope.mealData.latitude = position.lat;
       $scope.mealData.longitude = position.lng;
     });
 
     $scope.openMealForm();
-  }
-
-
-  $scope.editMeal = function(meal){
-   $scope.mealData = MealsService.get({id: meal.id},function(){
-    $scope.openMealForm();
-   }); 
   }
 
 
@@ -69,14 +67,14 @@ angular.module('starter.controllers')
       MealsService.update($scope.mealData,function(){
         $scope.mealFormModal.hide();        
         $ionicLoading.hide();
-        $scope.meals = MealsService.query();
+        $state.go('app.mymeals');
       })
 
     } else {
       MealsService.save($scope.mealData,function(){
         $scope.mealFormModal.hide();        
         $ionicLoading.hide();
-        $scope.meals = MealsService.query();        
+        $state.go('app.mymeals');       
       });      
     }
 

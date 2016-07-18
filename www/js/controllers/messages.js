@@ -4,6 +4,15 @@ angular.module('starter.controllers')
 .controller('MessagesCtrl', function($scope,MessageService) {
   $scope.messages = MessageService.query();
 
+  $scope.doRefresh = function(){
+    $scope.messages = MessageService.query();
+    $scope.$broadcast('scroll.refreshComplete');
+  }
+  $scope.$on("$ionicView.beforeEnter", function(event, data){
+    $scope.doRefresh();
+  });
+
+
   $scope.deleteMessage = function(message,idx){
    MessageService.remove({id: message.id},function(){
     $scope.messages.splice(idx, 1);

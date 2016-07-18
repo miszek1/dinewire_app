@@ -10,7 +10,7 @@
 	  <img ng-src="{{meal.image_url_thumb}}">
 	  <h2>{{meal.name}}</h2>
     <p>{{meal.description}}</p>
-	  <p ng-if="meal.latitude > 0"><strong>Location:</strong> {{meal.latitude}}, {{meal.longitude}}</p>
+    <p ng-if="meal.latitude > 0">{{meal | distance}}</p>
     </div>
 
     <div class="item item-image">

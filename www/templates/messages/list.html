@@ -1,7 +1,13 @@
-<ion-view view-title="Messages" cache-view="false">
+<ion-view>
+  <ion-nav-title>Messages</ion-nav-title>
   <ion-content>
+      <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
     <ion-list>
-      <ion-item ng-repeat="message in messages" class="item" href="#/app/messages/{{message.id}}">
+      <ion-item ng-repeat="message in messages" class="item item-icon-left" href="#/app/messages/{{message.id}}">
+      <i class=" icon ion-email"></i> 
 	      <h2>{{message.subject}}</h2>
 	      <p>{{message.body}}</p>
 			<ion-option-button class="button-assertive" ng-click="deleteMessage(message,$index)">
@@ -9,5 +15,10 @@
 			</ion-option-button>
       </ion-item>
     </ion-list>
+
+    <ion-item ng-show="!messages.length">
+      <h2 style="text-align:center">No Messages Available</h2>
+      <p style="text-align:center">Pull down to refesh the list</p>
+    </ion-item>
   </ion-content>
 </ion-view>
