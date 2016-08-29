@@ -1,7 +1,7 @@
 {
-  "name": "dinnerwire_app",
-  "version": "1.1.1",
-  "description": "dinnerwire_app: An Ionic project",
+  "name": "dinewire_app",
+  "version": "1.0.0",
+  "description": "An app to help people find the best places to eat",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^2.0.4",
@@ -22,17 +22,32 @@
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard",
     "cordova-plugin-geolocation",
+    "cordova-plugin-compat",
     {
+      "locator": "https://bitbucket.org/nightstomp/cordova-plugin-googlemaps-sdk.git",
+      "id": "com.googlemaps.ios"
+    },    
+    {
+      "locator": "https://github.com/phonegap-googlemaps-plugin/cordova-plugin-googlemaps",
+      "id": "cordova-plugin-googlemaps",
       "variables": {
         "API_KEY_FOR_ANDROID": "AIzaSyCRhBM7kw2tKXOxV-8iD3UmHA03pwHramg",
         "API_KEY_FOR_IOS": "AIzaSyApNI_vS9TYXxVl-Afae8U2bKt44O2Jl84"
-      },
-      "locator": "cordova-plugin-googlemaps",
-      "id": "plugin.google.maps"
+      }
     }
   ],
   "cordovaPlatforms": [
     "ios",
-    "android"
+    "android",
+    {
+      "platform": "android",
+      "version": "",
+      "locator": "android"
+    },
+    {
+      "platform": "ios",
+      "version": "",
+      "locator": "ios"
+    }
   ]
 }

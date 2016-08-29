@@ -15,23 +15,25 @@ angular.module('starter.services')
         getLocation: function(){
             var _self = this;
             var q = $q.defer();
-            document.addEventListener("deviceready", function(){
 
                 navigator.geolocation.getCurrentPosition(
                     function(pos){
-                        locationPickerPosition = new plugin.google.maps.LatLng(
-                            pos.coords.latitude,
-                            pos.coords.longitude
-                        );
 
-                        _self.setLastPosition(locationPickerPosition);
+                        locationPickerPosition = { lat: pos.coords.latitude, lng: pos.coords.longitude};
+                        document.addEventListener("deviceready", function(){
+                            locationPickerPosition = new plugin.google.maps.LatLng(
+                                pos.coords.latitude,
+                                pos.coords.longitude
+                            );
+
+                            _self.setLastPosition(locationPickerPosition);
+                        });
                         q.resolve(locationPickerPosition);
                     },
                     function(error){ console.log(error) },
                     { enableHighAccuracy: true } 
                 );
 
-            });
             return q.promise;
         },
         toggleWatchLocation: function(toggle){

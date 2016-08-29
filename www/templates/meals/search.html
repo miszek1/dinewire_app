@@ -1,22 +1,23 @@
-<ion-view view-title="Public Meals">
+<ion-view view-title="Public Meals Search">
 <ion-nav-buttons side="right">
 	<button class="button button-icon button-clear ion-android-add" ng-click="addMeal()">
 	</button>
 </ion-nav-buttons>
 	<ion-content>
-	    <ion-refresher
-      pulling-text="Pull to refresh..."
-      on-refresh="doRefresh()">
-    </ion-refresher>
-    <div id="map" data-tap-disabled="true"></div>
 		<ion-list can-swipe="true">
+			<div class="bar bar-header item-input-inset">
+			  <label class="item-input-wrapper">
+			    <i class="icon ion-ios-search placeholder-icon"></i>
+			    <input type="search" ng-model="searchTerm" ng-change="runSearch(searchTerm)" placeholder="Search">
+			  </label>
+			</div>
 		  <ion-item ng-repeat="meal in meals" class="item item-thumbnail-left" href="#/app/meals/{{meal.id}}">
 			<img ng-src="{{meal.image_url_thumb}}">
 			<h2>{{meal.name}}</h2>
 			<p>{{meal.description}}</p>
 			<p ng-if="meal.latitude > 0">{{meal | distance}}</p>
 		</ion-list>
-		<ion-item ng-show="!meals.length">
+		<ion-item ng-show="!meals.length && searchTerm.length">
 			<h2 style="text-align:center">No Recent Meals Available</h2>
 			<p style="text-align:center">Pull down to refesh the list</p>
 		</ion-item>

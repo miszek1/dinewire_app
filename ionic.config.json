@@ -1,5 +1,5 @@
 {
-  "name": "dinnerwire_app",
+  "name": "dinewire_app",
   "app_id": "583bab45",
   "gulpStartupTasks": [
     "sass",

@@ -5,8 +5,10 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 map = null;
+mapMyMeals = null;
+mapPublicMeals = null;
 //baseURL = 'http://dinewire.herokuapp.com/api/v1';
-baseURL = 'http://10.0.1.6:3000/api/v1';
+baseURL = 'http://localhost:3000/api/v1';
 lastknownLocation = null;
 token = null;
 function distance(lat1, lon1, lat2, lon2) {
@@ -86,6 +88,7 @@ angular.module('starter', ['ionic','ngResource', 'starter.controllers', 'starter
           }
       }
     })
+
     .state('app.mymeal', {
       url: '/mymeals/:mealId',
       views: {
@@ -95,6 +98,17 @@ angular.module('starter', ['ionic','ngResource', 'starter.controllers', 'starter
         }
       }
     })
+
+    .state('app.searchmeals', {
+      url: '/searchmeals',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/meals/search.html',
+            controller: 'MealSearchCtrl'
+          }
+      }
+    })
+
     .state('app.meals', {
       url: '/meals',
         views: {

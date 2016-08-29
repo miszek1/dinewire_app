@@ -18,14 +18,17 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item class=" item-icon-left" menu-close href="#/app/mymeals">
-         <i class=" icon ion-person"></i> My Meals
-        </ion-item>
         <ion-item class=" item-icon-left" menu-close href="#/app/meals">
           <i class=" icon ion-fork"></i> Public Meals
         </ion-item>
+        <ion-item class=" item-icon-left" menu-close href="#/app/searchmeals">
+          <i class=" icon ion-search"></i> Search Meals
+        </ion-item>
+        <ion-item class=" item-icon-left" menu-close href="#/app/mymeals">
+         <i class=" icon ion-person"></i> My Meals
+        </ion-item>
         <ion-item class=" item-icon-left" menu-close href="#/app/messages">
-          <i class=" icon ion-email"></i> Messages
+          <i class=" icon ion-email"></i> My Messages
         </ion-item>
         <ion-item class=" item-icon-left" menu-close ng-controller="LoginCtrl" ng-click="logout()">
           <i class=" icon ion-log-out"></i> Logout

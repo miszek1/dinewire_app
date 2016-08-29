@@ -5,24 +5,25 @@
 	</button>
 </ion-nav-buttons>
   <ion-content padding="false">
-<ion-card padding="false">
-    <div class="item item-avatar">
-	  <img ng-src="{{meal.image_url_thumb}}">
-	  <h2>{{meal.name}}</h2>
-    <p>{{meal.description}}</p>
-    <p ng-if="meal.latitude > 0">{{meal | distance}}</p>
+    <ion-card padding="false">
+      <div class="item item-avatar">
+      <img ng-src="{{meal.image_url_thumb}}">
+      <h2>{{meal.name}}</h2>
+      <p>{{meal.description}}</p>
+      <p ng-if="meal.latitude > 0">{{meal | distance}}</p>
 
-    </div>
+      </div>
 
-    <div class="item item-image">
-      <img ng-src="{{meal.image_url_orig}}">
-    </div>
+      <div class="item item-image">
+        <img ng-src="{{meal.image_url_orig}}">
+      </div>
+      <ion-item><h2>Map Location</h2></ion-item>  
+      <div id="mapMyMeals{{meal.id}}" data-tap-disabled="true" style="height:300px;"></div>
+      <a class="item item-icon-left assertive" ng-click="openMessage(meal)">
+        <i class="icon ion-email"></i>
+        Send Message
+      </a>
 
-    <a class="item item-icon-left assertive" ng-click="openMessage(meal)">
-      <i class="icon ion-email"></i>
-      Send Message
-    </a>
-
-  </ion-card>
+  </ion-card>  
   </ion-content>
 </ion-view>

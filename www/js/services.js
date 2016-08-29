@@ -2,19 +2,25 @@ angular.module('starter.services', [])
 .factory('MealsService', function ($resource,$localstorage,authService) {
     return $resource(baseURL +'/meals/:id',{id: "@id"},{
         my_query:  { method: 'GET', isArray: true, params:{my_meals:true}},
-        query: 	{ method: 'GET', isArray: true},
-        get: 	{ method: 'GET'},
+        query:  { method: 'GET', isArray: true},
+        search: { method: 'GET', isArray: true, params:{my_meals:true}},
+        get:    { method: 'GET'},
         remove: { method: 'DELETE'},
-    	update: {
+        update: {
                 method: 'PUT',
                 transformRequest: formDataObject,
                 headers: {'Content-Type':undefined, enctype:'multipart/form-data'}
             },
-    	save: {
+        save: {
                 method: 'POST',
                 transformRequest: formDataObject,
                 headers: {'Content-Type':undefined, enctype:'multipart/form-data'}
             }
+    });
+})
+.factory('SearchService', function ($resource) {
+    return $resource(baseURL +'/search/',null,{
+        query :  { method: 'GET', isArray: true }
     });
 })
 .factory('MessageService', function ($resource,$localstorage) {

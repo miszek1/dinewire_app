@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.dinnerwireapp944220" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.atsmobile.dinewire" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Dinewire</name>
   <description>
-        An Ionic Framework and Cordova project.
+      An app to help people find the best places to eat
     </description>
-  <author email="you@example.com" href="http://example.com.com/">
-      Your Name Here
+  <author email="mhziemianski@gmail.com" href="http://dinewire.herokuapp.com/">
+      Michael Ziemianski
     </author>
   <content src="index.html"/>
   <access origin="*"/>
@@ -68,6 +68,11 @@
     <splash src="resources/android/splash/drawable-port-xhdpi-screen.png" density="port-xhdpi"/>
     <splash src="resources/android/splash/drawable-port-xxhdpi-screen.png" density="port-xxhdpi"/>
     <splash src="resources/android/splash/drawable-port-xxxhdpi-screen.png" density="port-xxxhdpi"/>
+  </platform>
+  <platform name="wp8">
+    <icon src="resources/wp8/icon/ApplicationIcon.png" width="99" height="99"/>
+    <icon src="resources/wp8/icon/Background.png" width="159" height="159"/>
+    <splash src="resources/wp8/splash/SplashScreenImage.png" width="768" height="1280"/>
   </platform>
   <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
 </widget>

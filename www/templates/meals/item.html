@@ -1,15 +1,12 @@
 <ion-view>
   	<ion-nav-title>{{::meal.name}}</ion-nav-title>
-  	<ion-nav-buttons side="right">
-	<button class="button button-icon button-clear ion-trash-a" ng-click="deleteMeal(meal)">
-	</button>
-</ion-nav-buttons>
   <ion-content padding="false">
 <ion-card padding="false">
     <div class="item item-avatar">
 	  <img ng-src="{{meal.image_url_thumb}}">
 	  <h2>{{meal.name}}</h2>
     <p>{{meal.description}}</p>
+    <p>{{meal.author}}</p>
     <p ng-if="meal.latitude > 0">{{meal | distance}}</p>
     </div>
 
@@ -17,11 +14,14 @@
       <img ng-src="{{meal.image_url_orig}}">
     </div>
 
+      <ion-item><h2>Map Location</h2></ion-item>  
+      <div id="mapMyMeals{{meal.id}}" data-tap-disabled="true" style="height:300px;"></div>
+
+
     <a class="item item-icon-left assertive" ng-click="openMessage(meal)">
       <i class="icon ion-email"></i>
       Send Message
     </a>
-
   </ion-card>
   </ion-content>
 </ion-view>

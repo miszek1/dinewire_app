@@ -1,8 +1,8 @@
 angular.module('starter.controllers')
 
-.controller('MealsCtrl', function($scope, $ionicModal,$ionicLoading,MealsService,MapService,$state) {
+.controller('MealsCtrl', function($scope, $ionicModal, $ionicLoading, MealsService, MapService, $state ) {
   // Form data for the login modal
-  // 
+
   $scope.loadingLocation = false;
   $scope.doRefresh = function(){
     $scope.mealData = {};
@@ -14,12 +14,13 @@ angular.module('starter.controllers')
     });
     $scope.$broadcast('scroll.refreshComplete');
   }
+
   $scope.$on("$ionicView.beforeEnter", function(event, data){
     $scope.doRefresh();
   });
 
-   $scope.addMeal = function(){
-     $scope.mealData = {
+  $scope.addMeal = function(){
+    $scope.mealData = {
       name: "",
       description: "",
       image: "",
@@ -82,11 +83,38 @@ angular.module('starter.controllers')
 
 
 })
+.controller('MealSearchCtrl', function($scope, $ionicLoading, SearchService, $state ) {
+  // Form data for the login modal
+  $scope.meals = [];
+  $scope.runSearch = function(term){
+     $scope.meals = SearchService.query( { q : term } );
+  };
+
+})
 
 .controller('MealCtrl', function($scope, $stateParams, $state,$ionicPopup, $ionicLoading, $ionicModal,MealsService,MessageService) {
   $scope.meal = MealsService.get({id: $stateParams.mealId});
+  MealsService.get({id: $stateParams.mealId}).$promise.then(function(data){
+    $scope.meal = data;
 
+    var myLatlng = new google.maps.LatLng(data.latitude,data.longitude);
+    
+    mapMyMeals = new google.maps.Map(document.getElementById("mapMyMeals" + data.id),{
+      center: myLatlng,
+      zoom: 16,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
 
+    var myMarker = new google.maps.Marker({
+      position: myLatlng,
+      map: mapMyMeals
+    });
+
+  });
+
+  $scope.$on('$ionicView.beforeLeave', function(){
+      mapMyMeals = null;
+  });
 
   $scope.deleteMeal = function(meal) {
      var confirmPopup = $ionicPopup.confirm({
