@@ -7,8 +7,8 @@
 map = null;
 mapMyMeals = null;
 mapPublicMeals = null;
-//baseURL = 'http://dinewire.herokuapp.com/api/v1';
-baseURL = 'http://localhost:3000/api/v1';
+baseURL = 'http://dinewire.herokuapp.com/api/v1';
+//baseURL = 'http://localhost:3000/api/v1';
 lastknownLocation = null;
 token = null;
 function distance(lat1, lon1, lat2, lon2) {
