@@ -9,14 +9,20 @@
       <div class="item item-icon-left">
         <i class=" icon ion-email"></i> 
         <h2>{{message.subject}}</h2>
+        <p><strong>From:</strong> {{message.author}}</p>
         <p>{{message.created_at | formatDate}}</p>
       </div>
       <div class="item">
         <p ng-bind-html="message.body"></p>
+        <br ng-if="message.parentMessage" />
+        <div ng-if="message.parentMessage" class="item">
+          <h2>{{message.parentMessage.subject}}</h2>
+          <p><strong>From:</strong> {{message.parentMessage.author}}</p>
+          <p>{{message.parentMessage.created_at | formatDate}}</p>
+          <hr>
+          <p ng-bind-html="message.parentMessage.body"></p>
+        </div>
       </div>
-
-
-
     </ion-card>
   </ion-content>
 </ion-view>

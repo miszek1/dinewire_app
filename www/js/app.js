@@ -154,7 +154,7 @@ angular.module('starter', ['ionic','ngResource', 'starter.controllers', 'starter
 
     return function(date){
 
-      return $filter('date')(date, "MMMM dd,yyyy", "UTC");
+      return $filter('date')(date, "MMMM dd,yyyy h:mm a", "UTC");
 
     }
 

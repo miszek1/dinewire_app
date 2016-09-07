@@ -9,7 +9,8 @@
       <ion-item ng-repeat="message in messages" class="item item-icon-left" href="#/app/messages/{{message.id}}">
       <i class=" icon ion-email"></i> 
 	      <h2>{{message.subject}}</h2>
-	      <p>{{message.body}}</p>
+	      <p><strong>From:</strong> {{message.author}}</p>
+        <p>{{message.created_at | formatDate}}</p>
 			<ion-option-button class="button-assertive" ng-click="deleteMessage(message,$index)">
 				Delete
 			</ion-option-button>

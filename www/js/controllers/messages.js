@@ -23,7 +23,6 @@ angular.module('starter.controllers')
 
 .controller('MessageCtrl', function($scope, $stateParams,$filter,$state,$ionicPopup,$ionicModal, $ionicLoading, MessageService) {
   $scope.message = MessageService.get({id: $stateParams.messageId});
-
    $scope.deleteMessage = function(message) {
    var confirmPopup = $ionicPopup.confirm({
      title: 'Delete Message',
@@ -57,6 +56,7 @@ angular.module('starter.controllers')
   // Open the login modal
   $scope.openReply = function(message) {
     $scope.messageData.recipient_id =  message.user_id;
+    $scope.messageData.parent_id =  message.id;
     $scope.messageModal.show();
   };
 
