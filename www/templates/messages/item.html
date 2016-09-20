@@ -5,6 +5,7 @@
   <button class="button button-icon button-clear ion-trash-a" ng-click="deleteMessage(message)"></button>
 </ion-nav-buttons>
   <ion-content padding="false">
+  
     <ion-card padding="false">
       <div class="item item-icon-left">
         <i class=" icon ion-email"></i> 
@@ -12,17 +13,21 @@
         <p><strong>From:</strong> {{message.author}}</p>
         <p>{{message.created_at | formatDate}}</p>
       </div>
-      <div class="item">
+      <div class="item" style="padding:10px 6px">
         <p ng-bind-html="message.body"></p>
-        <br ng-if="message.parentMessage" />
-        <div ng-if="message.parentMessage" class="item">
-          <h2>{{message.parentMessage.subject}}</h2>
-          <p><strong>From:</strong> {{message.parentMessage.author}}</p>
-          <p>{{message.parentMessage.created_at | formatDate}}</p>
-          <hr>
-          <p ng-bind-html="message.parentMessage.body"></p>
-        </div>
-      </div>
+        <div ng-if="messageData.parentMessage" ng-include="'messageTree'" ng-repeat="messageData in [message.parentMessage]"></div>
     </ion-card>
   </ion-content>
 </ion-view>
+
+ <script type="text/ng-template" id="messageTree">
+  <br />
+  <div class="item" style="padding:10px 6px">
+    <h2>{{messageData.subject}}</h2>
+    <p><strong>From:</strong> {{messageData.author}}</p>
+    <p>{{messageData.created_at | formatDate}}</p>
+    <hr>
+    <p ng-bind-html="messageData.body"></p>
+    <div ng-if="messageData.parentMessage" ng-include="'messageTree'" ng-repeat="messageData in [messageData.parentMessage]"></div>
+  </div>
+  </script>
